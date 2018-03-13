@@ -1,0 +1,12 @@
+Package: analise
+Type: Package
+Title: Analise estatistico
+Version: 0.1.0
+Author: Walter Humberto Subiza Pina
+Maintainer: Walter Humberto Subiza Pina <walter.pina@ibge.gov.br>
+Description: Funcao para carregar funcoes basicas de analise assim como funcoes de calculo:
+    "resumo", "ce90", "le90" e "eqm90"
+License: GNU General Public License, Version 3, June 2007.
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
