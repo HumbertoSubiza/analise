@@ -17,5 +17,5 @@ calculo del 90\%  do erro,  LE90 para verificacao do PEC
 }
 \examples{
 le90(DeltaN)
-le90()
+le90(DeltaH)
 }

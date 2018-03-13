@@ -17,5 +17,5 @@ calculo del Erro Quadratico Medio para verificacao do PEC
 }
 \examples{
 eqm(DeltaH)
-eqm()
+eqm(DeltaN)
 }
