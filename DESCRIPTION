@@ -9,8 +9,15 @@ Description: Funcoes basicas de analise para avaliacao de produtos cartograficos
     pelo PEC. Os produtos podem ser ortofotos e modelos digitais de elevacao.
     As componentes do deslocamento planimetrico (DeltaE e DeltaN), assim como
     de deslocamento altimétrico (DeltaH), sao avaliadas nas principais medidas
-    de posicao e dispersao, assim como sao calculados os valores de CE e LE 90
+    de posicao e dispersao, assim como sao calculados os valores de CE, LE 90
     e o EQM de cada amostra.
+    Para o LE90 eh usado a formula RMSE*1,6449 para o CE90 RMSE*2,15. 
+    O RMSE ou Erro Medio Quadratico - EQM, eh calculado como a raiz quadrada do 
+    somatorio dos deslocamentos ao quadrado, divido pelo numero de observacoes 
+    a menos de 1.
+    Os valores de 1,6449 e 2,15 correspondem a 90 % de probabilidade para uma 
+    distribuicao normal ou gaussiana e se relacionam com o erro padrão.
+    (Decreto Lei no. 89817 de 1984-06-20)
 Depends: R (>= 3.4.0)
 Published: 2018-03-14
 License:  GPL (>= 2)

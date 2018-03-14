@@ -37,7 +37,9 @@ avalia_resumo <- function(x) {
 #'
 
 avalia_ce90    <- function(x, y) {
-  rsme <- sum(sqrt((x^2 + y^2) / (length(x) - 1)))
+  x    <- x[complete.cases(x)]
+  y    <- y[complete.cases(y)]
+  rsme <- sqrt(sum(x^2 + y^2) / (length(x) - 1))
                ce.90 <- round((rsme * 2.15), 2)
                return (ce.90)
 }
@@ -54,7 +56,8 @@ avalia_ce90    <- function(x, y) {
 #'
 
 avalia_le90    <- function(x) {
-  rsme <- sqrt((x^2) / (length(x) - 1))
+  x    <- x[complete.cases(x)]
+  rsme <- sqrt(sum(x^2) / (length(x) - 1))
                le.90 <- round((rsme * 1.6449), 2)
                return (le.90)
 }
@@ -70,6 +73,7 @@ avalia_le90    <- function(x) {
 #' avalia_eqm(x)
 
 avalia_eqm <- function (x){
+  x     <- x[complete.cases(x)]
   ord.x <- sort(x)
   x.2   <- (ord.x^2)
   n     <- (length(x.2) - 1)
