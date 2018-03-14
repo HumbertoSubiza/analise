@@ -4,19 +4,23 @@
 \alias{avalia_eqm}
 \title{Funcao avalia_eqm - avalia_eqm function}
 \usage{
-avalia_eqm(x)
+avalia_eqm(x, y = 0)
 }
 \arguments{
 \item{x}{entrada de vetor numerico pode ter NAs.}
+
+\item{y}{entrada de vetor numerico pode ter NAs. Valor padrão = 0}
 }
 \value{
 imprime valor de EQM da amostra analisada
 }
 \description{
-calcula Erro Quadratico Medio para verificacao do PEC
+calcula Erro Quadratico Medio para posterior verificacao do PEC
 }
 \examples{
 set.seed(123)
 x <- rnorm(30,1.5,0.5)
+y <- rnorm(30,2,1)
 avalia_eqm(x)
+avalia_eqm(x,y)
 }

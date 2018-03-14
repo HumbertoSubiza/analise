@@ -17,7 +17,7 @@ Calcula e imprime numero de observacoes, media, desvpad, mediana, min, max, ampl
 }
 \examples{
 set.seed(123)
-x <- rnorm(30,1.5,0.5)
+x <- c(1.21,0.95,1.55,2.11,0.66, NA, 1.74,0.51,NA,1.85)
 avalia_resumo(x)
 
 }

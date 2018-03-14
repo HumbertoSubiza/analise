@@ -23,6 +23,28 @@ avalia_resumo <- function(x) {
         digits = 2)
 }
 
+#' Funcao avalia_eqm - avalia_eqm function
+#'
+#' calcula Erro Quadratico Medio para posterior verificacao do PEC
+#' @param x entrada de vetor numerico pode ter NAs.
+#' @param y entrada de vetor numerico pode ter NAs. Valor padrão = 0
+#' @return  imprime valor de EQM da amostra analisada
+#' @export
+#' @examples set.seed(123)
+#' x <- rnorm(30,1.5,0.5)
+#' y <- rnorm(30,2,1)
+#' avalia_eqm(x)
+#' avalia_eqm(x,y)
+
+avalia_eqm <- function(x, y=0){
+  x    <- x[complete.cases(x)]
+  y    <- y[complete.cases(y)]
+  remq <- sqrt(sum(x^2 + y^2) / (length(x) - 1))
+  return(remq)
+}
+
+
+
 #' Funcao avalia_ce90 -  avalia_ce90 function
 #'
 #' Calcula  90 porcento do erro circular CE90 em planimetria para verificacao do PEC
@@ -36,12 +58,9 @@ avalia_resumo <- function(x) {
 #' avalia_ce90(x,y)
 #'
 
-avalia_ce90    <- function(x, y) {
-  x    <- x[complete.cases(x)]
-  y    <- y[complete.cases(y)]
-  rsme <- sqrt(sum(x^2 + y^2) / (length(x) - 1))
-               ce.90 <- round((rsme * 2.15), 2)
-               return (ce.90)
+avalia_ce90 <- function(x, y) {
+      ce.90 <- round(( avalia_eqm(x,y) * 2.15), 2)
+      return (ce.90)
 }
 
 #' Funcao avalia_le90 - avalia_le90 function
@@ -56,31 +75,11 @@ avalia_ce90    <- function(x, y) {
 #'
 
 avalia_le90    <- function(x) {
-  x    <- x[complete.cases(x)]
-  rsme <- sqrt(sum(x^2) / (length(x) - 1))
-               le.90 <- round((rsme * 1.6449), 2)
-               return (le.90)
-}
-
-#' Funcao avalia_eqm - avalia_eqm function
-#'
-#' calcula Erro Quadratico Medio para verificacao do PEC
-#' @param x entrada de vetor numerico pode ter NAs.
-#' @return  imprime valor de EQM da amostra analisada
-#' @export
-#' @examples set.seed(123)
-#' x <- rnorm(30,1.5,0.5)
-#' avalia_eqm(x)
-
-avalia_eqm <- function (x){
-  x     <- x[complete.cases(x)]
-  ord.x <- sort(x)
-  x.2   <- (ord.x^2)
-  n     <- (length(x.2) - 1)
-  eqm   <- round(sqrt((sum(x.2) / n)), 2)
-  return (eqm)
+  le.90 <- round(( avalia_eqm(x) * 1.6449), 2)
+  return (le.90)
 }
 
 #' Modificacoes:
+#' em 14 de marco 2018.  adaptacao das funcoes
 
 
