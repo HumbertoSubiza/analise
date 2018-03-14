@@ -1,12 +1,19 @@
 Package: analise
 Type: Package
-Title: Analise estatistico
+Title: Analise estatistico para PEC
 Version: 0.1.0
-Author: Walter Humberto Subiza Pina
+Authors@R: person("Walter", "Pina", email = "walter.pina@ibge.gov.br",
+                  role = c("aut", "cre"))
 Maintainer: Walter Humberto Subiza Pina <walter.pina@ibge.gov.br>
-Description: Funcao para carregar funcoes basicas de analise assim como funcoes de calculo:
-    "resumo", "ce90", "le90" e "eqm90"
-License: GNU General Public License, Version 3, June 2007.
+Description: Funcoes basicas de analise para avaliacao de produtos cartograficos
+    pelo PEC. Os produtos podem ser ortofotos e modelos digitais de elevacao.
+    As componentes do deslocamento planimetrico (DeltaE e DeltaN), assim como
+    de deslocamento altimétrico (DeltaH), sao avaliadas nas principais medidas
+    de posicao e dispersao, assim como sao calculados os valores de CE e LE 90
+    e o EQM de cada amostra.
+Depends: R (>= 3.4.0)
+Published: 2018-03-14
+License:  GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
