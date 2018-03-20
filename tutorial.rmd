@@ -1,0 +1,101 @@
+Tutorial de criação de pacotes. **!!Ainda em construção!!**
+
+O presente tutorial cobre apenas aspectos básicos da criação de pacotes no R. A criação de pacotes é uma ferramenta eficaz para centralizar e distribuir funções que se repetem ou que temos de usar com frequência ou precisamos compartilhar.
+
+Está baseado na postagem de Hillary Parker, "Writing an R package from scratch", documentação do pacote “roxygen2” e no livro de  Hadley Wickman "R Packages".
+
+Para criar o pacote, devemos ter a última versão de Rstudio e atualizados os pacotes, “devtools” e “roxygen2”.
+
+Procedimento
+
+Abrindo o Rstudio:
+
+File/New Project
+
+Criamos um diretório “analisse” com o nome do pacote a criar e automaticamente serão criados 2 subdiretórios “man” e “R”. Se temos script já feitos, podemos carregar eles na janela do médio.
+
+No subdiretório “R”, estarão os script das funções a serem executadas no pacote. Pode ser um script com várias funções ou um script para cada função (recomendado).
+
+No “Man” os scripts de manuais de cada função, serão feitos em forma automática mais adiante. 
+
+Além dos subdiretórios, temos os arquivos correspondentes no raiz do novo repositório “git” e mais dois arquivos “DESCRIPTION” e “NAMESPACE”. 
+No primeiro “DESCRIPTION”, são os metadados do seu pacote, no segundo todo os dados e funções necessárias para o usuário. 
+
+Esse arquivo “NAMESPACE” é gerenciado pelo pacote “devtools”, não editar a não ser por indicação expressa ou sugestão dele.
+
+Primeira tarefa: preencher os campos do arquivo “DESCRIPTION”. Podemos abrir ele diretamente no R e fazer as alterações que se detalham na sequência, os nomes em laranja são os campos obrigatórios a serem preenchidos depois dos dois pontos.
+
+Package: analise
+Type: Package
+Title: Analise estatistico para PEC
+Version: 0.2.0
+Authors@R: person("Walter", "Pina", email = "walter.pina@ibge.gov.br",
+                  role = c("aut", "cre"))
+Maintainer: Walter Humberto Subiza Pina <walter.pina@ibge.gov.br>
+Description: Funcoes basicas de analise para avaliacao de produtos cartograficos
+    pelo PEC. Os produtos podem ser ortofotos e modelos digitais de elevacao.
+    As componentes do deslocamento planimetrico (DeltaE e DeltaN), assim como
+    de deslocamento altimétrico (DeltaH), sao avaliadas nas principais medidas
+    de posicao e dispersao, assim como sao calculados os valores de CE, LE 90
+    e o EQM de cada amostra.
+    Para o LE90 eh usado a formula RMSE*1,6449 para o CE90 RMSE*2,15. 
+    O RMSE ou Erro Medio Quadratico - EQM, eh calculado como a raiz quadrada do 
+    somatorio dos deslocamentos ao quadrado, divido pelo numero de observacoes 
+    a menos de 1.
+    Os valores de 1,6449 e 2,15 correspondem a 90 % de probabilidade para uma 
+    distribuicao normal ou gaussiana e se relacionam com o erro padrão.
+    (Decreto Lei no. 89817 de 1984-06-20)
+Depends: R (>= 3.4.0)
+Published: 2018-03-14
+License:  GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+
+O campo “Description” pode ter mais de uma linha, mas deve estar indentado por ao menos 4 espaços em branco. Exemplo de preenchimento
+
+Segunda tarefa, adicionar função ou funções no script R, inserindo os detalhes dos parâmetros usados para cada uma. Essas primeiras linhas começadas com #'  servem para construir depois a ajuda de cada função. 
+
+Exemplo: adicionar uma função avalia_eqm. Que calcula o erro médio quadrático de uma variável ou o vetor de duas variáveis. No segundo caso as variáveis têm a mesma dimensão.
+
+#' Funcao avalia_eqm - avalia_eqm function
+#'
+#' calcula Erro Quadratico Medio para posterior verificacao do PEC
+#' @param x entrada de vetor numerico pode ter NAs.
+#' @param y entrada de vetor numerico pode ter NAs. Valor padrão = 0
+#' @return  imprime valor de EQM da amostra analisada
+#' @export
+#' @examples set.seed(123)
+#' x <- rnorm(30,1.5,0.5)
+#' y <- rnorm(30,2,1)
+#' avalia_eqm(x)
+#' avalia_eqm(x,y)
+
+avalia_eqm <- function(x, y=0){
+  x    <- x[complete.cases(x)]
+  y    <- y[complete.cases(y)]
+  remq <- sqrt(sum(x^2 + y^2) / (length(x) - 1))
+  return(remq)
+}
+
+O parâmerto @export, permite que as funções chamadas, sejam adicionadas a “NAMESPACE” automaticamente e carregadas no ambiente global. São as dependências do pacote, neste caso temos “rnom”, “sqrt”, “complete.cases,” “sum” e “length”.
+
+Terceira tarefa: fazer a documentação com o comando
+
+devtools::document()
+
+Os pagráfos começados como #' serão transformados na ajuda das funções criadas.
+
+Quarta tarefa: checar o pacote para integridade e completude. Resolver problemas que surjam. 
+
+'Ctrl + Shift + E'  
+
+Quinta tarefa:  construir e carregar o pacote com 
+
+'Ctrl + Shift + B'
+
+Outros detalhes: O pacote fica residente na biblioteca do R. Para distribuir, basta fazer uma cópia “.tar.gz” e enviar aos interessados.
+
+A submissão de pacotes no CRAN é um processo mais complicado, deve-se dominar bem os detalhes, recomenda-se ler o livro de Hadley Wickman mencionado no comeco. 
+
+Boa sorte!!
