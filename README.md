@@ -1,9 +1,10 @@
-## analise package
+## Pacote "analise"
 
-This is the first R package I made, following examples from Hillary Parker´s "Writing an R package from scratch" 
-and also documentation from `roxygen2` and Hadley Wickman "R Packages"
+2018-03-22
 
-It just contains a "resumo" function, summary of several simples _R_ Base functions as mean(), max(), sd()...
-a ce90 and le90 functions, to calculate the 90% value of a dataset, and the EQM function to calculate the RMSE.
+#### Este projeto foi criado para construir um pacote que facilita-se a execução de um script de avaliação plani-altimétrica de produtos cartográficos (ortofotos e MDTs), dentro da gerência CCAR/GIMAG.
 
+#### Contiene 6 funções: "avalia_CE90", "avalia_cria", "avalia_eqm", "avalia_estat_abs", "avalia_LE90", e "avalia_resumo" (ver ajuda das funções).
+
+#### Sendo específicas, não tem pretensão de ser usadas para outras finalidades, mas seu código pode ser reaproveitado.
 
