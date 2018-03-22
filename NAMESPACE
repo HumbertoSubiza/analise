@@ -1,2 +1,4 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("stats", "median", "sd", "complete.cases", "rnorm")
+importFrom("stats", "median", "sd","complete.cases", "rnorm")
+
+
